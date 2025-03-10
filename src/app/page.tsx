@@ -1,101 +1,117 @@
+import { Navigation, Users } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+import { Schoolbell } from "next/font/google";
+
+const schoolbell = Schoolbell({
+  weight: ["400"],
+  style: "normal",
+  display: "swap",
+  subsets: ["latin"],
+});
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="">
+      <div className="">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          src={"/top.png"}
+          alt="Top-design"
+          width={2000}
+          height={2000}
+          className=""
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <LandingPage />
+      <div className="pt-24"></div>
     </div>
   );
 }
+
+const LandingPage = () => {
+  return (
+    <div className="flex flex-col gap-y-2 w-full max-w-xl mx-auto relative">
+      <Image
+        src={"/half-note.png"}
+        alt="half-note"
+        width={1000}
+        height={1000}
+        className="h-6 w-6 absolute top-1/2 left-10 animate-jittery-3"
+      />
+      <Image
+        src={"/shimmer.png"}
+        alt="half-note"
+        width={1000}
+        height={1000}
+        className="h-6 w-6 absolute top-[calc(50%-3em)] right-10 animate-jittery-3 animate-delay-2"
+      />
+      <div className="mx-auto px-4 mt-10">
+        <Image
+          src={"/title.png"}
+          alt="Jannea Eiden is Turning 19"
+          width={2000}
+          height={2000}
+          className="w-full max-w-sm"
+        />
+      </div>
+      <div className="mx-auto px-4 w-full max-w-sm">
+        <h3
+          className="text-primary text-xl sm:text-2xl text-center animate-delay-1"
+          style={{ fontFamily: "wcmano-bold" }}
+        >
+          Friday, April 25th | 7PM -<br /> Saturday, April 26th | 4pm
+        </h3>
+      </div>
+      <div className="mx-auto px-4 mt-4">
+        <Image
+          src={"/cake.png"}
+          alt="cake"
+          width={2000}
+          height={2000}
+          className="w-full sm:w-3/4 max-w-sm mx-auto animate-jittery-1"
+        />
+      </div>
+      <div className="mx-auto px-4 w-full max-w-sm mt-10 flex flex-col gap-y-2 items-center">
+        <div>
+          <h3
+            className="text-foreground text-3xl/5 sm:text-4xl/5 text-center"
+            style={{ fontFamily: "wcmano-bold" }}
+          >
+            The Lauv Villa
+          </h3>
+          <h2
+            className={`text-foreground text-lg sm:text-lg text-center ${schoolbell.className}`}
+          >
+            Binangonan, City
+          </h2>
+        </div>
+        <div className="mt-12 flex flex-col md:flex-row gap-x-4 items-center justify-center w-full">
+          <Button
+            size={"lg"}
+            className={`w-full md:w-auto p-6 drop-shadow-lg cursor-pointer transition-colors duration-300 ${schoolbell.className}`}
+          >
+            <Link href={"/rsvp"} className="flex gap-x-4 items-center text-xl">
+              <Users className="h-7 w-7 animate-jittery-2" /> RSVP
+            </Link>
+          </Button>
+          <Button
+            asChild
+            className="w-full md:w-auto flex-1 p-6 text-xl cursor-pointer transition-colors duration-300"
+            variant={"ghost"}
+            size={"lg"}
+          >
+            <Link
+              href="https://maps.app.goo.gl/9rYB34Lua1pgaDAS9"
+              target="_blank"
+              className={`flex items-center ${schoolbell.className}`}
+            >
+              <Navigation className="animate-jittery-3" /> Get Directions
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
