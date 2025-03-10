@@ -1,3 +1,7 @@
+"use client";
+
+import { useParams } from "next/navigation";
+
 import { Navigation, Users } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -13,6 +17,9 @@ const schoolbell = Schoolbell({
 });
 
 export default function Home() {
+  const params = useParams();
+  const { type } = params;
+
   return (
     <div className="">
       <div className="">
@@ -24,13 +31,17 @@ export default function Home() {
           className=""
         />
       </div>
-      <LandingPage />
+      <LandingPage isReal={type == "sat" ? false : true} />
       <div className="pt-24"></div>
     </div>
   );
 }
 
-const LandingPage = () => {
+interface LandingPageProps {
+  isReal: boolean;
+}
+
+const LandingPage = ({ isReal }: LandingPageProps) => {
   return (
     <div className="flex flex-col gap-y-2 w-full max-w-xl mx-auto relative">
       <Image
@@ -61,7 +72,9 @@ const LandingPage = () => {
           className="text-primary text-xl sm:text-2xl text-center animate-delay-1"
           style={{ fontFamily: "wcmano-bold" }}
         >
-          Friday, April 25th | 7PM -<br /> Saturday, April 26th | 4pm
+          {isReal
+            ? "Friday, April 25th | 7PM - Saturday, April 26th | 4pm"
+            : "Saturday, April 26th | 8AM - 1PM"}
         </h3>
       </div>
       <div className="mx-auto px-4 mt-4">
@@ -92,7 +105,10 @@ const LandingPage = () => {
             size={"lg"}
             className={`w-full md:w-auto p-6 drop-shadow-lg cursor-pointer transition-colors duration-300 ${schoolbell.className}`}
           >
-            <Link href={"/rsvp"} className="flex gap-x-4 items-center text-xl">
+            <Link
+              href={`/rsvp${!isReal ? "/1" : "/0"}`}
+              className="flex gap-x-4 items-center text-xl"
+            >
               <Users className="h-7 w-7 animate-jittery-2" /> RSVP
             </Link>
           </Button>

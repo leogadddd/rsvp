@@ -1,27 +1,30 @@
-import { FormData } from "@/app/form";
+import { FormDataBase, FormDataWithSleepover } from "@/app/form";
 
 const useLocalStorage = () => {
-  const STORAGE_KEY = process.env.NEXT_PUBLIC_STORAGE_KEY;
-
-  if (!STORAGE_KEY)
+  const DEFAULT_STORAGE_KEY = process.env.NEXT_PUBLIC_STORAGE_KEY;
+  if (!DEFAULT_STORAGE_KEY)
     throw new Error("ENV VAR NOT FOUND: NEXT_PUBLIC_STORAGE_KEY not found!");
 
-  const saveToLocalStorage = (data: FormData, isSubmitted: boolean = false) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    localStorage.setItem(
-      `${STORAGE_KEY}_submitted`,
-      isSubmitted ? "true" : "false"
-    );
+  const saveToLocalStorage = (
+    data: FormDataBase | FormDataWithSleepover,
+    isSubmitted: boolean = false,
+    customKey?: string
+  ) => {
+    const key = customKey || DEFAULT_STORAGE_KEY;
+    localStorage.setItem(key, JSON.stringify(data));
+    localStorage.setItem(`${key}_submitted`, isSubmitted ? "true" : "false");
   };
 
-  const loadFromLocalStorage = (): {
-    data: FormData | null;
+  const loadFromLocalStorage = (
+    customKey?: string
+  ): {
+    data: FormDataBase | FormDataWithSleepover | null;
     isSubmitted: boolean;
   } => {
+    const key = customKey || DEFAULT_STORAGE_KEY;
     try {
-      const savedData = localStorage.getItem(STORAGE_KEY);
-      const submissionStatus = localStorage.getItem(`${STORAGE_KEY}_submitted`);
-
+      const savedData = localStorage.getItem(key);
+      const submissionStatus = localStorage.getItem(`${key}_submitted`);
       return {
         data: savedData ? JSON.parse(savedData) : null,
         isSubmitted: submissionStatus === "true",
@@ -32,9 +35,10 @@ const useLocalStorage = () => {
     }
   };
 
-  const clearLocalStorage = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem(`${STORAGE_KEY}_submitted`);
+  const clearLocalStorage = (customKey?: string) => {
+    const key = customKey || DEFAULT_STORAGE_KEY;
+    localStorage.removeItem(key);
+    localStorage.removeItem(`${key}_submitted`);
   };
 
   return { saveToLocalStorage, loadFromLocalStorage, clearLocalStorage };

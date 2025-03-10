@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import html2canvas from "html2canvas-pro";
 import { Button } from "@/c/ui/button";
+import { Input } from "@/components/ui/input";
 
 const QRCodePage = () => {
   return (
@@ -15,6 +16,7 @@ const QRCodePage = () => {
 
 const QRCodeGenerator = () => {
   const qrRef = useRef<HTMLDivElement | null>(null);
+  const [link, setLink] = useState<string>("https://invitation.leogadil.com");
 
   const downloadQRCode = () => {
     const qrElement = qrRef.current;
@@ -33,7 +35,7 @@ const QRCodeGenerator = () => {
     <div className="flex flex-col justify-center items-center gap-y-12">
       <div ref={qrRef}>
         <QRCodeSVG
-          value="https://invitation.leogadil.com"
+          value={link}
           title="Title for my QR Code"
           size={128}
           bgColor="#fbf6e3"
@@ -41,6 +43,7 @@ const QRCodeGenerator = () => {
           level="L"
         />
       </div>
+      <Input value={link} onChange={(e) => setLink(e.target.value)} />
       <Button onClick={downloadQRCode} variant={"outline"}>
         Download
       </Button>

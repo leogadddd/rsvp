@@ -1,6 +1,14 @@
-import RSVPForm from "../form";
+"use client";
+
+import { useParams } from "next/navigation";
+
+import RSVPForm from "../../form";
 import Image from "next/image";
-export default function Home() {
+
+export default function RSVP() {
+  const params = useParams();
+  const { x } = params;
+
   return (
     <div className="">
       <div className="">
@@ -12,7 +20,7 @@ export default function Home() {
           className=""
         />
       </div>
-      <RSVPForm />
+      <RSVPForm isReal={x === "1" ? false : true} />
       <div className="pt-24"></div>
     </div>
   );
