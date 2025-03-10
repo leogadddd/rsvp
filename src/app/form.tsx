@@ -211,7 +211,8 @@ const RSVPForm: React.FC = () => {
 
     // Small timeout to prevent flash of unstyled content
     setTimeout(loadData, 300);
-  }, [loadFromLocalStorage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
